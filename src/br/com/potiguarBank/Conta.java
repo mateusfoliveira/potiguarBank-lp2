@@ -2,7 +2,7 @@ package br.com.potiguarBank;
 
 public abstract class Conta {
 
-	private static int numeroContas = 100;
+	private static int numeroConta = 100;
 	
 	private int numero;
 	
@@ -30,7 +30,7 @@ public abstract class Conta {
 
 	public Conta(long saldo, String cliente, String tipo) {
 		super();
-		this.numero = ++numeroContas;
+		this.numero = ++numeroConta;
 		this.saldo = saldo;
 		this.cliente = cliente;
 		this.tipo = tipo;
