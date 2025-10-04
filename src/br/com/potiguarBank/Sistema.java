@@ -13,6 +13,52 @@ public class Sistema {
 		this.listaContas = new ArrayList<>();
 		
 	}
+
+	
+	public void criarConta(Scanner scanner){
+		
+		System.out.println("--------------------------------");
+		System.out.println("Digite o nome do dono da conta: ");
+		System.out.println("--------------------------------");
+		
+		String nome = scanner.nextLine();
+		
+		System.out.println("--------------------------------------");
+		System.out.println("Escolha o tipo da conta a ser criada: ");
+		System.out.println("--------------------------------------");
+		System.out.println(" 1 - Poupança\n 2 - Corrente");
+		System.out.println("------------------------\n");
+		
+		int entrada = scanner.nextInt();
+		scanner.nextLine();
+		
+		System.out.println("-------------------------------------------------------------------------------");
+		System.out.println("Deseja realizar um depósitio inicial? Se sim digite um valor maior do que zero.");
+		System.out.println("-------------------------------------------------------------------------------\n");
+		
+		long saldo = scanner.nextLong();
+		
+		Conta novaConta = null;
+		
+		switch(entrada) {
+			case 1:
+					novaConta = new ContaPoupanca(nome);
+
+			case 2:
+					novaConta = new ContaCorrente(nome);
+					
+				break;
+					
+			default:
+					System.out.println("---------------------------------------------");
+					System.out.println("Opção de conta inválida, cancelando operação.");
+					System.out.println("---------------------------------------------");
+				return;	
+		}
+		listaContas.add(novaConta);
+		
+		System.out.println("Conta criada com sucesso!");
+	}
 	
 	public void menu(){
 		
@@ -35,6 +81,7 @@ public class Sistema {
 		switch(entrada) {
 			//Criar conta
 			case 1:
+				//criarConta(Scanner scanner);
 				break;
 			//Depositar
 			case 2:
@@ -52,7 +99,10 @@ public class Sistema {
 			case 6:
 				break;
 				
-			case 7:
+			case 7:				
+			System.out.println("-------------------");
+			System.out.println("Programa encerrado.");
+			System.out.println("-------------------\n");
 				scanner.close();
 				return;
 				

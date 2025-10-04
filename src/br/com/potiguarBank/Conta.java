@@ -27,10 +27,11 @@ public abstract class Conta {
 	public String getCliente() {
 		return cliente;
 	}
+	
 
-	public Conta(long saldo, String cliente, String tipo) {
+	public Conta(String cliente, String tipo) {
 		this.numero = ++numeroConta;
-		this.saldo = saldo;
+		this.saldo = 0;
 		this.cliente = cliente;
 		this.tipo = tipo;
 	}
