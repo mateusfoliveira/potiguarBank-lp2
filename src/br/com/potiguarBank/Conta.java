@@ -1,12 +1,14 @@
 package br.com.potiguarBank;
 
+import java.math.BigDecimal;
+
 public abstract class Conta {
 
 	private static int numeroConta = 100;
 	
 	private int numero;
 	
-	private long saldo;
+	private BigDecimal saldo;
 	
 	private String cliente;
 	
@@ -20,7 +22,7 @@ public abstract class Conta {
 		return tipo;
 	}
 
-	public long getSaldo() {
+	public BigDecimal getSaldo() {
 		return saldo;
 	}
 
@@ -31,24 +33,25 @@ public abstract class Conta {
 
 	public Conta(String cliente, String tipo) {
 		this.numero = ++numeroConta;
-		this.saldo = 0;
+		this.saldo = new BigDecimal("0");
 		this.cliente = cliente;
 		this.tipo = tipo;
 	}
 	
-	public void depositar(long valor){
+	public void depositar(BigDecimal valor){
 		
-		if(valor <= 0) {
-			System.out.println("---------------------------------------");
-			System.out.println("Depósito inválido! Cancelando operação.");
-			System.out.println("---------------------------------------");
+		BigDecimal zero = new BigDecimal("0");
+		
+		if(valor.compareTo(zero) <= 0){
+			System.out.println("---------------------------------------------------");
+			System.out.println("Depósito inválido! Cancelando operação de depósito.");
+			System.out.println("---------------------------------------------------\n");
 			return ;
 		}
 		
-		
-		saldo += valor;
-		System.out.println("-----------------------------");
-		System.out.println("Valor depositado com sucesso!");
-		System.out.println("-----------------------------");
+		saldo = saldo.add(valor);
+		System.out.println("-----------------------------------------------------------");
+		System.out.println("Valor depositado com sucesso! Novo saldo da conta " + getNumero() + ": " + getSaldo());
+		System.out.println("-----------------------------------------------------------");
 	}
 }
