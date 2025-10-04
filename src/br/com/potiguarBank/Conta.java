@@ -29,10 +29,25 @@ public abstract class Conta {
 	}
 
 	public Conta(long saldo, String cliente, String tipo) {
-		super();
 		this.numero = ++numeroConta;
 		this.saldo = saldo;
 		this.cliente = cliente;
 		this.tipo = tipo;
+	}
+	
+	public void depositar(long valor){
+		
+		if(valor <= 0) {
+			System.out.println("---------------------------------------");
+			System.out.println("Depósito inválido! Cancelando operação.");
+			System.out.println("---------------------------------------");
+			return ;
+		}
+		
+		
+		saldo += valor;
+		System.out.println("-----------------------------");
+		System.out.println("Valor depositado com sucesso!");
+		System.out.println("-----------------------------");
 	}
 }
