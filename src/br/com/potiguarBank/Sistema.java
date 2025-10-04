@@ -1,8 +1,9 @@
 package br.com.potiguarBank;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Scanner;
-//import java.util.InputMismatchException;
+
 
 public class Sistema {
 	
@@ -13,8 +14,17 @@ public class Sistema {
 		this.listaContas = new ArrayList<>();
 		
 	}
-
 	
+	public BigDecimal converterValor(String entrada) {
+		
+		String valorString = entrada.trim().replace(",", ".");
+		
+		BigDecimal valor = new BigDecimal (valorString);
+
+		return valor;
+	}
+	
+	//Case 1 
 	public void criarConta(Scanner scanner){
 		
 		System.out.println("--------------------------------");
@@ -31,63 +41,118 @@ public class Sistema {
 		
 		int entrada = scanner.nextInt();
 		scanner.nextLine();
-		
-		System.out.println("-------------------------------------------------------------------------------");
-		System.out.println("Deseja realizar um depósitio inicial? Se sim digite um valor maior do que zero.");
-		System.out.println("-------------------------------------------------------------------------------\n");
-		
-		long saldo = scanner.nextLong();
-		
+	
 		Conta novaConta = null;
 		
 		switch(entrada) {
 			case 1:
-					novaConta = new ContaPoupanca(nome);
+				novaConta = new ContaPoupanca(nome);
+				break;
 
 			case 2:
-					novaConta = new ContaCorrente(nome);
-					
+				novaConta = new ContaCorrente(nome);	
 				break;
 					
 			default:
-					System.out.println("---------------------------------------------");
-					System.out.println("Opção de conta inválida, cancelando operação.");
-					System.out.println("---------------------------------------------");
+				System.out.println("---------------------------------------------");
+				System.out.println("Opção de conta inválida, cancelando operação.");
+				System.out.println("---------------------------------------------\n");
 				return;	
 		}
 		
-		novaConta.depositar(saldo);
+		System.out.println("-----------------------------------------");
+		System.out.println("Deseja realizar um depósitio inicial? s/n");
+		System.out.println("------------------------------------------\n");
+		
+		String entradaString = scanner.nextLine();
+		
+		if(entradaString.equalsIgnoreCase("s")){
+			System.out.println("-----------------------------------------------");
+			System.out.println("Digite o valor a ser depositado.\"Ex: 22,50\" :");
+			System.out.println("-----------------------------------------------");
+			String valorString = scanner.nextLine();
+			novaConta.depositar(converterValor(valorString));	
+		}
+		
 		
 		listaContas.add(novaConta);
 		
+		System.out.println("-------------------------");
 		System.out.println("Conta criada com sucesso!");
+		System.out.println("-------------------------");
+	}
+	
+	//Case 2
+	public void realizarDeposito(Scanner scanner){
+		
+		if(listaContas.isEmpty()) {
+			System.out.println("----------------------------------------------------------");
+			System.out.println("Não foram criadas contas no sistema, cancelando operação.");
+			System.out.println("----------------------------------------------------------");
+			return;
+		}
+		
+		System.out.println("-------------------------");
+		System.out.println("Digite o número da conta:");
+		System.out.println("-------------------------\n");
+		
+		int numeroConta = scanner.nextInt();
+		scanner.nextLine();
+		
+		Conta contaDeposito = null;
+		
+		for(Conta conta : listaContas) {
+			if(conta.getNumero() == numeroConta) {
+				contaDeposito = conta;
+				break;
+			}
+		}
+		
+		if(contaDeposito == null) {
+			System.out.println("------------------------------------------");
+			System.out.println("Conta não encontrada! Cancelando depósito.");
+			System.out.println("------------------------------------------");
+			return;
+		}
+		
+		System.out.println("-----------------------------------------------");
+		System.out.println("Digite o valor a ser depositado.\"Ex: 22,50\" :");
+		System.out.println("-----------------------------------------------");
+		
+		String valorString = scanner.nextLine();
+		
+
+		contaDeposito.depositar(converterValor(valorString));
+		
+		
 	}
 	
 	public void menu(){
+		System.out.println("=============================");
+		System.out.println("Bem vindo ao Potiguar Bank! |");
+		System.out.println("=============================");
 		
 		while(true) {
 		
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("=============================");
-		System.out.println("Bem vindo ao Potiguar Bank! |");
-		System.out.println("=============================");
-		System.out.println("------------------------");
+		
+		System.out.println("-----------------------");
 		System.out.println("Escolha uma das opções: ");
-		System.out.println("------------------------");
+		System.out.println("-------------------------------");
 		System.out.println(" 1 - Criar conta\n 2 - Realizar depósito \n 3 - Realizar saque\n 4 - Realizar transferência");
 		System.out.println(" 5 - Listar contas\n 6 - Calcular total de tributos \n 7 - Encerrar o programa");
-		System.out.println("-------------------------");
+		System.out.println("-------------------------------");
 		
 		int entrada = scanner.nextInt();
 		scanner.nextLine();
 		
 		switch(entrada) {
-			//Criar conta
 			case 1:
-				//criarConta(Scanner scanner);
+				criarConta(scanner);
 				break;
-			//Depositar
+				
 			case 2:
+				realizarDeposito(scanner);
 				break;
 			//Sacar
 			case 3:
@@ -100,6 +165,7 @@ public class Sistema {
 				break;
 				
 			case 6:
+			//Calcular tributos
 				break;
 				
 			case 7:				
