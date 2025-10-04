@@ -55,6 +55,9 @@ public class Sistema {
 					System.out.println("---------------------------------------------");
 				return;	
 		}
+		
+		novaConta.depositar(saldo);
+		
 		listaContas.add(novaConta);
 		
 		System.out.println("Conta criada com sucesso!");
