@@ -1,6 +1,6 @@
 package br.com.potiguarBank;
 
-public interface Tributavel {
+public interface ITributavel {
 	
 	public void calcularTributos();
 
