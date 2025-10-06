@@ -37,7 +37,7 @@ public class Sistema {
 		System.out.println("Escolha o tipo da conta a ser criada: ");
 		System.out.println("--------------------------------------");
 		System.out.println(" 1 - Poupança\n 2 - Corrente");
-		System.out.println("------------------------\n");
+		System.out.println("------------------------");
 		
 		int entrada = scanner.nextInt();
 		scanner.nextLine();
@@ -62,7 +62,7 @@ public class Sistema {
 		
 		System.out.println("-----------------------------------------");
 		System.out.println("Deseja realizar um depósitio inicial? s/n");
-		System.out.println("------------------------------------------\n");
+		System.out.println("------------------------------------------");
 		
 		String entradaString = scanner.nextLine();
 		
@@ -126,6 +126,25 @@ public class Sistema {
 		
 		
 	}
+	//Case 6
+	public void listarContas(){
+		
+		if(listaContas.isEmpty()) {
+			System.out.println("\n============================");
+			System.out.println("Nenhuma conta foi registrada");
+			System.out.println("============================\n");
+			return;
+		}
+		
+		System.out.println("\n============================");
+		System.out.println("Lista de contas registradas: ");
+		System.out.println("============================");
+		
+		for(Conta conta : listaContas) {
+			conta.mostrarConta();
+		}
+	}
+	
 	
 	public void menu(){
 		System.out.println("=============================");
@@ -154,18 +173,17 @@ public class Sistema {
 			case 2:
 				realizarDeposito(scanner);
 				break;
-			//Sacar
 			case 3:
+				//realizarSaque(scanner);
 				break;
-			//Transferir
 			case 4:
+				//realizarTransferencia(scanner);
 				break;
-			//Listar contas
 			case 5:
+				listarContas();
 				break;
-				
 			case 6:
-			//Calcular tributos
+				//calcularTributos();
 				break;
 				
 			case 7:				
