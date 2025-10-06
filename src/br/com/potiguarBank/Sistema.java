@@ -126,7 +126,7 @@ public class Sistema {
 		
 		
 	}
-	//Case 6
+	//Case 5
 	public void listarContas(){
 		
 		if(listaContas.isEmpty()) {
@@ -142,6 +142,28 @@ public class Sistema {
 		
 		for(Conta conta : listaContas) {
 			conta.mostrarConta();
+		}
+	}
+	//Case 6
+	public void calcularTributos(){
+		BigDecimal tributos = new BigDecimal("0");
+		BigDecimal zero = new BigDecimal("0");
+		
+		for(Conta conta : listaContas) {
+			if(conta instanceof ITributavel){
+				tributos = tributos.add(((ITributavel) conta).calcularTributos());
+			}
+		}
+		
+		if(tributos.equals(zero)) {
+			System.out.println("-----------------------------------------------");
+			System.out.println("Não há contas compatíveis para cobrar tributos.");
+			System.out.println("-----------------------------------------------\n");
+		}
+		else {
+			System.out.println("\n----------------------------------------");
+			System.out.println("Total de tributos a recolher: R$ " + tributos.toString().replace(".", ","));
+			System.out.println("----------------------------------------");
 		}
 	}
 	
@@ -183,7 +205,7 @@ public class Sistema {
 				listarContas();
 				break;
 			case 6:
-				//calcularTributos();
+				calcularTributos();
 				break;
 				
 			case 7:				

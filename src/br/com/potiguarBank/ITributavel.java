@@ -1,7 +1,9 @@
 package br.com.potiguarBank;
 
+import java.math.BigDecimal;
+
 public interface ITributavel {
 	
-	public void calcularTributos();
+	public BigDecimal calcularTributos();
 
 }
