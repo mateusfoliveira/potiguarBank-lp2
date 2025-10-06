@@ -54,4 +54,16 @@ public abstract class Conta {
 		System.out.println("Valor depositado com sucesso! Novo saldo da conta " + getNumero() + ": " + getSaldo());
 		System.out.println("-----------------------------------------------------------");
 	}
+	
+	public void mostrarConta(){
+		
+		System.out.println("\n-----------");
+		System.out.println("Conta " + getNumero() + " |");
+		System.out.println("------------------");
+		System.out.println("Titular: " + getCliente());
+		System.out.println("Tipo: " + getTipo());
+		System.out.println("Saldo: " + getSaldo());
+		System.out.println("------------------\n");
+		
+	}
 }
