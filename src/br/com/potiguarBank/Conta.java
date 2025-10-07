@@ -25,6 +25,10 @@ public abstract class Conta {
 	public BigDecimal getSaldo() {
 		return saldo;
 	}
+	
+	public String getSaldoFormatado(){
+		return "R$ " + saldo.setScale(2).toString().replace(".", ",");
+	}
 
 	public String getCliente() {
 		return cliente;
@@ -50,9 +54,13 @@ public abstract class Conta {
 		}
 		
 		saldo = saldo.add(valor);
-		System.out.println("-----------------------------------------------------------");
-		System.out.println("Valor depositado com sucesso! Novo saldo da conta " + getNumero() + ": " + getSaldo().setScale(2).toString().replace(".", ","));
-		System.out.println("-----------------------------------------------------------");
+		System.out.println("-----------------------------");
+		System.out.println("Valor depositado com sucesso!");
+		System.out.println("-----------------------------\n");
+		
+		System.out.println("-----------------------------");
+		System.out.println("Novo saldo da conta " + getNumero() + ": " + getSaldoFormatado());
+		System.out.println("-----------------------------");
 	}
 	
 	public void mostrarConta(){
@@ -62,7 +70,7 @@ public abstract class Conta {
 		System.out.println("------------------");
 		System.out.println("Titular: " + getCliente());
 		System.out.println("Tipo: " + getTipo());
-		System.out.println("Saldo: " + getSaldo().setScale(2).toString().replace(".", ","));
+		System.out.println("Saldo: " + getSaldoFormatado());
 		System.out.println("------------------\n");
 		
 	}
