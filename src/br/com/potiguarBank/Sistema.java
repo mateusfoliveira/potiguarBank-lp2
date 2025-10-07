@@ -1,6 +1,7 @@
 package br.com.potiguarBank;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,9 +18,10 @@ public class Sistema {
 	
 	public BigDecimal converterValor(String entrada) {
 		
+		
 		String valorString = entrada.trim().replace(",", ".");
 		
-		BigDecimal valor = new BigDecimal (valorString);
+		BigDecimal valor = new BigDecimal(valorString).setScale(2, RoundingMode.HALF_UP);
 
 		return valor;
 	}
@@ -126,6 +128,46 @@ public class Sistema {
 		
 		
 	}
+	//Case 3
+	public void realizarSaque(Scanner scanner){
+		
+		int numero = 0;
+		
+		System.out.println("-------------------------");
+		System.out.println("Digite o número da conta:");
+		System.out.println("-------------------------");
+		
+		numero = scanner.nextInt();
+		scanner.nextLine();
+		
+		Conta contaSaque = null;
+		
+		for(Conta conta : listaContas) {
+			if(conta.getNumero() == numero) {
+				contaSaque = conta;
+				break;
+			}
+		}
+		
+		if(contaSaque == null) {
+			System.out.println("---------------------------------------");
+			System.out.println("Conta não encontrada! Cancelando saque.");
+			System.out.println("---------------------------------------");
+			return;
+		}
+		
+		System.out.println("-----------------------------------------------");
+		System.out.println("Digite o valor a ser sacado.\"Ex: 45,20\" :");
+		System.out.println("-----------------------------------------------");
+		
+		String valor = scanner.nextLine();
+		
+		
+		contaSaque.sacar(converterValor(valor));
+		
+		
+	}
+	
 	//Case 5
 	public void listarContas(){
 		
@@ -196,7 +238,7 @@ public class Sistema {
 				realizarDeposito(scanner);
 				break;
 			case 3:
-				//realizarSaque(scanner);
+				realizarSaque(scanner);
 				break;
 			case 4:
 				//realizarTransferencia(scanner);

@@ -26,6 +26,10 @@ public abstract class Conta {
 		return saldo;
 	}
 	
+	protected void setSaldo(BigDecimal saldo) {
+		this.saldo =  saldo;
+	}
+	
 	public String getSaldoFormatado(){
 		return "R$ " + saldo.setScale(2).toString().replace(".", ",");
 	}
@@ -54,6 +58,7 @@ public abstract class Conta {
 		}
 		
 		saldo = saldo.add(valor);
+		
 		System.out.println("-----------------------------");
 		System.out.println("Valor depositado com sucesso!");
 		System.out.println("-----------------------------\n");
@@ -62,6 +67,8 @@ public abstract class Conta {
 		System.out.println("Novo saldo da conta " + getNumero() + ": " + getSaldoFormatado());
 		System.out.println("-----------------------------");
 	}
+	
+	public abstract void sacar(BigDecimal valor);
 	
 	public void mostrarConta(){
 		
