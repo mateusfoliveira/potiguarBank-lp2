@@ -51,7 +51,7 @@ public abstract class Conta {
 		
 		saldo = saldo.add(valor);
 		System.out.println("-----------------------------------------------------------");
-		System.out.println("Valor depositado com sucesso! Novo saldo da conta " + getNumero() + ": " + getSaldo());
+		System.out.println("Valor depositado com sucesso! Novo saldo da conta " + getNumero() + ": " + getSaldo().setScale(2).toString().replace(".", ","));
 		System.out.println("-----------------------------------------------------------");
 	}
 	
@@ -62,7 +62,7 @@ public abstract class Conta {
 		System.out.println("------------------");
 		System.out.println("Titular: " + getCliente());
 		System.out.println("Tipo: " + getTipo());
-		System.out.println("Saldo: " + getSaldo());
+		System.out.println("Saldo: " + getSaldo().setScale(2).toString().replace(".", ","));
 		System.out.println("------------------\n");
 		
 	}
