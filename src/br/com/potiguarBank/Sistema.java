@@ -167,6 +167,52 @@ public class Sistema {
 		
 		
 	}
+	//Case 4
+	public void realizarTransferencia(Scanner scanner) {
+		
+		int numeroContaOrigem = -1;
+		
+		Conta contaOrigem = null;
+		
+		System.out.println("-----------------------------------");
+		System.out.println("Digite o número da conta de origem:");
+		System.out.println("-----------------------------------");
+	
+		numeroContaOrigem = scanner.nextInt();
+		scanner.nextLine();
+		
+		int numeroContaDestino = -1;
+		
+		Conta contaDestino = null;
+		
+		System.out.println("------------------------------------");
+		System.out.println("Digite o número da conta de destino:");
+		System.out.println("------------------------------------");
+		
+		numeroContaDestino = scanner.nextInt();
+		scanner.nextLine();
+	
+		for(Conta conta : listaContas) {
+			if(conta.getNumero() == numeroContaOrigem) {
+				contaOrigem = conta;
+				continue;
+			}
+			else if (conta.getNumero() == numeroContaDestino) {
+				contaDestino = conta;
+			}
+		}
+		
+		String valorTransferencia = "0";
+		
+		System.out.println("---------------------------------------");
+		System.out.println("Digite o valor que se deseja transferir");
+		System.out.println("---------------------------------------");
+		
+		valorTransferencia = scanner.nextLine();
+		
+		contaOrigem.transferir(converterValor(valorTransferencia), contaDestino);
+		
+	}
 	
 	//Case 5
 	public void listarContas(){
@@ -241,7 +287,7 @@ public class Sistema {
 				realizarSaque(scanner);
 				break;
 			case 4:
-				//realizarTransferencia(scanner);
+				realizarTransferencia(scanner);
 				break;
 			case 5:
 				listarContas();

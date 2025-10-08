@@ -35,6 +35,35 @@ public class ContaPoupanca extends Conta{
 		
 		
 	}
+	
+	@Override
+	public void transferir(BigDecimal valor, Conta contaDestino) {
+		
+		BigDecimal zero = new BigDecimal("0");
+		
+		if(valor.compareTo(zero) <= 0) {
+			System.out.println("--------------------------------------");
+			System.out.println("Valor inválido, encerrando a operação.");
+			System.out.println("--------------------------------------\n");
+			return;
+		}
+		
+		if(getSaldo().compareTo(valor) < 0) {
+			System.out.println("-----------------------------------------------");
+			System.out.println("Saldo insuficiente para realizar transferência.");
+			System.out.println("-----------------------------------------------\n");
+			return;
+		}
+		
+		this.setSaldo(this.getSaldo().subtract(valor));
+		
+		contaDestino.depositar(valor);
+		
+		System.out.println("------------------------------------");
+		System.out.println("Transferência concluida com sucesso!");
+		System.out.println("------------------------------------\n");
+		
+	}
 
 	public ContaPoupanca(String cliente){
 		super(cliente, "Poupanca");

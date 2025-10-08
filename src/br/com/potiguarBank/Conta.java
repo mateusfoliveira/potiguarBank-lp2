@@ -70,6 +70,8 @@ public abstract class Conta {
 	
 	public abstract void sacar(BigDecimal valor);
 	
+	public abstract void transferir(BigDecimal valor, Conta contaDestino);
+	
 	public void mostrarConta(){
 		
 		System.out.println("\n-----------");
